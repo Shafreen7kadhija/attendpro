@@ -5,7 +5,7 @@ import DashboardLayout from "./layouts/DashboardLayout";
 import Settings from "./pages/Settings";
 import StudentProfile from "./pages/StudentProfile";
 import { Toaster } from "react-hot-toast";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
@@ -15,15 +15,7 @@ import Records from "./pages/Records";
 
 function App() {
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  useEffect(() => {
-    const user = localStorage.getItem("user");
-    setIsLoggedIn(!!user);
-  }, []);
-
-  window.addEventListener("storage", () => {
-    setIsLoggedIn(!!localStorage.getItem("user"));
-  });
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
 
  return (
   <div className="min-h-screen bg-gray-100 dark:bg-slate-800 dark:text-gray-100">
