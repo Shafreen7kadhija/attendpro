@@ -943,7 +943,7 @@ if __name__ == "__main__":
         db.create_all()
 
         # ✅ Create default login user (only once)
-        if not User.query.first():
+        if not User.query.filter_by(email="admin@gmail.com").first():
             default_user = User(
                 email="admin@gmail.com",
                 password=generate_password_hash("admin123")
