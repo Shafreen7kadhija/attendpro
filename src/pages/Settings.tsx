@@ -50,7 +50,7 @@ useEffect(() => {
 
 const handleVerifyPassword = async () => {
   try {
-    const res = await fetch("http://127.0.0.1:5000/verify-password", {
+    const res = await fetch("https://attendpro-backend.onrender.com/verify-password", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -103,7 +103,7 @@ const handleVerifyPassword = async () => {
   localStorage.setItem("userProfile", JSON.stringify(updatedUser));
 
   // 🔥 SEND TO BACKEND
- const res = await fetch("http://127.0.0.1:5000/save-settings", {
+ const res = await fetch("https://attendpro-backend.onrender.com/save-settings", {
   method: "POST",
   headers: {
     "Content-Type": "application/json"

@@ -26,7 +26,7 @@ export default function Records() {
   // Fetch records from backend
   useEffect(() => {
 
-    fetch("http://127.0.0.1:5000/records")
+    fetch("https://attendpro-backend.onrender.com/records")
       .then(res => res.json())
       .then(data => setRecordsData(data))
       .catch(err => console.error("Error fetching records:", err));
@@ -119,7 +119,7 @@ const exportExcel = () => {
   const recordsToDelete = selectedRows.map(i => filteredRecords[i]);
 
   try {
-    await fetch("http://127.0.0.1:5000/delete-records", {
+    await fetch("https://attendpro-backend.onrender.com/delete-records", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -132,7 +132,7 @@ const exportExcel = () => {
     setSelectedRows([]);
 
     // refresh data
-    fetch("http://127.0.0.1:5000/records")
+    fetch("https://attendpro-backend.onrender.com/records")
       .then(res => res.json())
       .then(data => setRecordsData(data));
 

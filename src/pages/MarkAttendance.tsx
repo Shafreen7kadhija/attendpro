@@ -22,7 +22,7 @@ export default function MarkAttendance() {
 
   const fetchStudents = async () => {
     try {
-      const res = await fetch("http://127.0.0.1:5000/students");
+      const res = await fetch("https://attendpro-backend.onrender.com/students");
       const data = await res.json();
       setStudents(data);
     } catch (error) {
@@ -87,7 +87,7 @@ export default function MarkAttendance() {
       // Entry attendance (for dashboard)
 if (attendanceType === "entry") 
   {
-    await fetch("http://127.0.0.1:5000/entry_attendance", {
+    await fetch("https://attendpro-backend.onrender.com/entry_attendance", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -102,7 +102,7 @@ if (attendanceType === "entry")
 
 } else {
 
-await fetch("http://127.0.0.1:5000/attendance", {
+await fetch("https://attendpro-backend.onrender.com/attendance", {
 method: "POST",
 headers: {
 "Content-Type": "application/json"
@@ -140,7 +140,7 @@ catch (error) {
 
       if (attendanceType === "entry") {
 
-        await fetch("http://127.0.0.1:5000/entry_attendance", {
+        await fetch("https://attendpro-backend.onrender.com/entry_attendance", {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
@@ -154,7 +154,7 @@ catch (error) {
 
       } else {
 
-        await fetch("http://127.0.0.1:5000/attendance", {
+        await fetch("https://attendpro-backend.onrender.com/attendance", {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
@@ -208,13 +208,13 @@ const handleSaveAttendance = async () => {
 
   try {
 
-    const res = await fetch("http://localhost:5000/trigger-low-attendance", {
+    const res = await fetch("https://attendpro-backend.onrender.com/trigger-low-attendance", {
       method: "POST"
     });
 
     const data = await res.json();   // 🔥 FIX
 
-    console.log(data);
+    console.log(data);  
 
     toast.success("Attendance saved successfully");
 

@@ -8,17 +8,17 @@ export default function StudentView() {
   const [records, setRecords] = useState<any[]>([]);
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:5000/student_profile/${id}`)
+    fetch(`https://attendpro-backend.onrender.com/student_profile/${id}`)
       .then(res => res.json())
       .then(data => setStudent(data))
       .catch(() => console.log("Error"));
 
-    fetch(`http://127.0.0.1:5000/student-weekly/${id}`)
+    fetch(`https://attendpro-backend.onrender.com/student_profile/${id}`)
       .then(res => res.json())
       .then(data => setWeekly(data))
       .catch(() => console.log("Weekly error"));
 
-    fetch(`http://127.0.0.1:5000/student-records/${id}`)
+    fetch(`https://attendpro-backend.onrender.com/student-records/${id}`)
     .then(res => res.json())
     .then(data => setRecords(data))
     .catch(() => console.log("Records error"));

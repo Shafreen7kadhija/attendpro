@@ -34,7 +34,7 @@ export default function Students() {
 
   // fetch students
   const fetchStudents = async () => {
-    const res = await fetch("http://127.0.0.1:5000/students");
+    const res = await fetch("https://attendpro-backend.onrender.com/students");
     const data = await res.json();
     setStudents(data);
   };
@@ -53,7 +53,7 @@ export default function Students() {
 
     try {
 
-      const res = await fetch("http://127.0.0.1:5000/students", {
+      const res = await fetch("https://attendpro-backend.onrender.com/students", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -90,7 +90,7 @@ export default function Students() {
 
   try {
 
-    const res = await fetch(`http://127.0.0.1:5000/students/${id}`, {
+    const res = await fetch(`https://attendpro-backend.onrender.com/students/${id}`, {
       method: "DELETE"
     });
 
@@ -111,7 +111,7 @@ export default function Students() {
 
     try {
 
-      const res = await fetch(`http://127.0.0.1:5000/students/${editStudent.id}`, {
+      const res = await fetch(`https://attendpro-backend.onrender.com/students/${editStudent.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"

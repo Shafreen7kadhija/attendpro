@@ -15,14 +15,14 @@ export default function StudentProfile() {
 
   useEffect(() => {
 
-    fetch(`http://127.0.0.1:5000/student_profile/${id}`)
+    fetch(`https://attendpro-backend.onrender.com/student_profile/${id}`)
   .then(res => res.json())
   .then(data => {
     console.log("PROFILE:", data);
     setProfile(data);
   });
 
-fetch(`http://127.0.0.1:5000/student-weekly/${id}`)
+fetch(`https://attendpro-backend.onrender.com/student-weekly/${id}`)
   .then(res => res.json())
   .then(data => {
     console.log("WEEKLY:", data);

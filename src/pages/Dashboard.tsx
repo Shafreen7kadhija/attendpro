@@ -29,17 +29,17 @@ export default function Dashboard() {
   useEffect(() => {
 
     // Dashboard cards
-    fetch("http://127.0.0.1:5000/dashboard")
+    fetch("https://attendpro-backend.onrender.com/dashboard")
       .then(res => res.json())
       .then(data => setStats(data));
 
     // Weekly attendance
-    fetch("http://127.0.0.1:5000/weekly")
+    fetch("https://attendpro-backend.onrender.com/weekly")
       .then(res => res.json())
       .then(data => setWeeklyData(data));
 
     // Attendance distribution
-    fetch("http://127.0.0.1:5000/distribution")
+    fetch("https://attendpro-backend.onrender.com/distribution")
       .then(res => res.json())
       .then(data => {
 
@@ -52,7 +52,7 @@ export default function Dashboard() {
       });
 
     // Subject overview
-    fetch("http://127.0.0.1:5000/subjects")
+    fetch("https://attendpro-backend.onrender.com/subjects")
       .then(res => res.json())
       .then(data => setSubjects(data));
 
