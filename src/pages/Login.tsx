@@ -25,13 +25,15 @@ export default function Login() {
     );
 
       localStorage.setItem("user", JSON.stringify(res.data));
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("userEmail", email);
       toast.success("Login successful ✅");
       setTimeout(() => {
         const user = res.data;
         if (user.role === "student") {
-            window.location.href = `/student-view/${user.id}`;
+            navigate(`/student-view/${user.id}`);
         } else {
-            window.location.href = "/home";
+            navigate("/home");
         }
       }, 1000);
 
