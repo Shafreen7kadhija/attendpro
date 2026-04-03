@@ -713,7 +713,7 @@ def login():
     print("DB User:", user.email if user else "No user")
     print("Stored Hash:", user.password if user else "No password")
 
-    if user and check_password_hash(user.password, password):
+    if user and user.password == password:
         return jsonify({
             "role": "staff",
             "message": "Login successful",
@@ -946,7 +946,7 @@ if __name__ == "__main__":
         if not User.query.filter_by(email="admin@gmail.com").first():
             default_user = User(
                 email="admin@gmail.com",
-                password=generate_password_hash("admin123")
+                password="admin123"
             )
             db.session.add(default_user)
             db.session.commit()
