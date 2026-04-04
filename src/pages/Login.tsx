@@ -25,10 +25,11 @@ export default function Login() {
       localStorage.setItem("isLoggedIn", "true");
       toast.success("Login successful ✅");
       // 🔥 SIMPLE & WORKING LOGIC
-      if (email === "admin@gmail.com") {
-        navigate("/home");
+      const user = res.data;
+      if (user.role === "student") {
+        navigate(`/student-view/${user.id}`);
     } else {
-        navigate("/student-view/1");
+        navigate("/home");
     }
 
     } catch (err) {

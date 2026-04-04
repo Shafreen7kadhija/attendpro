@@ -15,7 +15,7 @@ import Records from "./pages/Records";
 
 function App() {
 
-  const isLoggedIn = localStorage.getItem("isLoggedIn");
+  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
 
  return (
   <div className="min-h-screen bg-gray-100 dark:bg-slate-800 dark:text-gray-100">
@@ -29,7 +29,7 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route
         path="/home"
-        element={isLoggedIn ? <Home /> : <Login />}
+        element={isLoggedIn ? <Home /> : <Navigate to="/" />}
         />
 
         <Route
@@ -43,7 +43,10 @@ function App() {
         <Route path="/student-profile/:id" element={<StudentProfile />} />
         <Route path="/student-dashboard/:id" element={<StudentProfile />} />
         <Route path="/student-dashboard/:id" element={<StudentProfile />} />
-        <Route path="/student-view/:id" element={<StudentView />} />
+        <Route
+        path="/student-view/:id"
+        element={isLoggedIn ? <StudentView /> : <Navigate to="/" />}
+        />
 
         <Route
           path="/settings"
