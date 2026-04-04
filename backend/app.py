@@ -920,17 +920,22 @@ def get_settings():
 @app.route("/student-records/<int:student_id>")
 def student_records(student_id):
 
-    records = EntryAttendance.query.filter_by(student_id=student_id).all()
+    try:
+        records = EntryAttendance.query.filter_by(student_id=student_id).all()
 
-    data = []
+        data = []
 
-    for r in records:
-        data.append({
-            "date": r.date,
-            "status": r.status
-        })
+        for r in records:
+            data.append({
+                "date": r.date,
+                "status": r.status
+            })
 
-    return jsonify(data)
+        return jsonify(data)
+
+    except Exception as e:
+        print("ERROR:", e)
+        return jsonify({"error": "Server error"}), 500
 
 # ================= RUN =================
 
