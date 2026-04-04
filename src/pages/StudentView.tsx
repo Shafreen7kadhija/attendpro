@@ -24,9 +24,9 @@ export default function StudentView() {
     .catch(() => console.log("Records error"));
   }, [id]);
 
-  if (student === null) {
+  if (!student || !student.subjects) {
      return <p className="p-6">Loading...</p>;
-    }
+}
 
   const getStatus = (value: number) => {
     if (value >= 75) return { text: "Good", color: "bg-green-100 text-green-700" };
@@ -84,7 +84,7 @@ export default function StudentView() {
       <div className="bg-white p-6 rounded-xl shadow">
         <h2 className="text-xl font-semibold mb-4">Subject Attendance</h2>
 
-        {student.subjects.map((sub: any, i: number) => (
+        {student.subjects?.map((sub: any, i: number) => (
           <div key={i} className="mb-3">
             <div className="flex justify-between items-center">
               <span>{sub.name}</span>
