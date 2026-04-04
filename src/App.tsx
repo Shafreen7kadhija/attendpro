@@ -15,7 +15,14 @@ import Records from "./pages/Records";
 
 function App() {
 
-  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  useEffect(() => {
+    const user = localStorage.getItem("isLoggedIn");
+    setIsLoggedIn(user === "true");
+  }, []);
+  window.addEventListener("storage", () => {
+    setIsLoggedIn(localStorage.getItem("isLoggedIn") === "true");
+  });
 
  return (
   <div className="min-h-screen bg-gray-100 dark:bg-slate-800 dark:text-gray-100">
