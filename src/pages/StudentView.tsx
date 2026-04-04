@@ -20,6 +20,7 @@ export default function StudentView() {
     fetch(`https://attendpro-backend.onrender.com/student-records/${id}`)
   .then(res => res.json())
   .then(data => {
+    console.log("RECORDS DATA:", data); 
     setRecords(data);
 
     // 🔥 CREATE WEEKLY DATA FROM RECORDS
@@ -28,11 +29,13 @@ export default function StudentView() {
     };
 
     data.forEach((rec: any) => {
-      const day = new Date(rec.date).toLocaleDateString("en-US", {
+      const [d, m, y] = rec.date.split("-");
+      const formattedDate = new Date(`${y}-${m}-${d}`);
+      const day = formattedDate.toLocaleDateString("en-US", {
         weekday: "short"
-      });
+    });
 
-      if (rec.status === "Present") {
+      if (rec.status?.toLowerCase() === "present" || rec.status?.toLowerCase() === "late") {
         weekMap[day] += 100;
       }
     });
