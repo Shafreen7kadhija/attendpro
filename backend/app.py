@@ -6,6 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime, timedelta, date
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_mail import Mail, Message
+from sqlalchemy import func
 
 app = Flask(__name__)
 CORS(app)
@@ -411,24 +412,24 @@ def subjects():
 
     for sub in subjects:
 
-        today = str(date.today())
+        today = date.today().strftime("%d-%m-%Y")
         
         present = Attendance.query.filter(
             Attendance.subject == sub["code"],
             Attendance.date == today,
-            Attendance.status == "Present"
+            func.lower(Attendance.status) == "present"
         ).count()
         
         late = Attendance.query.filter(
             Attendance.subject == sub["code"],
             Attendance.date == today,
-            Attendance.status == "Late"
+            func.lower(Attendance.status) == "late"
         ).count()
         
         absent = Attendance.query.filter(
             Attendance.subject == sub["code"],
             Attendance.date == today,
-            Attendance.status == "Absent"
+            func.lower(Attendance.status) == "absent"
         ).count()
         
         total_records = present + late + absent
