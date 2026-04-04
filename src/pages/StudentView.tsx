@@ -24,7 +24,7 @@ export default function StudentView() {
     .catch(() => console.log("Records error"));
   }, [id]);
 
-  if (!student || !student.subjects) {
+  if (!student) {
      return <p className="p-6">Loading...</p>;
 }
 
@@ -84,7 +84,7 @@ export default function StudentView() {
       <div className="bg-white p-6 rounded-xl shadow">
         <h2 className="text-xl font-semibold mb-4">Subject Attendance</h2>
 
-        {student.subjects?.map((sub: any, i: number) => (
+        {(student.subjects || []).map((sub: any, i: number) => (
           <div key={i} className="mb-3">
             <div className="flex justify-between items-center">
               <span>{sub.name}</span>
@@ -141,7 +141,7 @@ export default function StudentView() {
 
           {/* BARS */}
           <div className="flex items-end justify-between h-full ml-10 pr-4">
-            {weekly?.map((day, i) => (
+            {(weekly || []).map((day, i) => (
               <div key={i} className="flex flex-col items-center flex-1">
 
                 <div className="relative group flex flex-col items-center">
@@ -153,18 +153,19 @@ export default function StudentView() {
   <div
     className={`w-9 rounded-t transition-all duration-700 ease-out z-10
       ${
-        day.attendance === 0
-          ? "bg-transparent group-hover:bg-gray-400"
-          : new Date().toLocaleDateString('en-US', { weekday: 'short' }) === day.name
-          ? "bg-green-500"
-          : "bg-blue-600"
-      }
+  day?.attendance === 0
+    ? "bg-transparent group-hover:bg-gray-400"
+    : day?.name &&
+      new Date().toLocaleDateString('en-US', { weekday: 'short' }) === day.name
+    ? "bg-green-500"
+    : "bg-blue-600"
+}
     `}
     style={{
       height:
-        day.attendance === 0
-          ? "0px"
-          : `${(day.attendance / 100) * 200}px`,
+        day?.attendance === 0
+        ? "0px"
+        : `${((day?.attendance || 0) / 100) * 200}px`
     }}
   ></div>
 
