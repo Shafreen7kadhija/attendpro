@@ -8,7 +8,8 @@ export default function StudentView() {
   const [weekly, setWeekly] = useState<any[]>([]);
   const [records, setRecords] = useState<any[]>([]);
   const user = JSON.parse(localStorage.getItem("user") || "null");
-  if (!user || user.role !== "student") {
+  // 🔥 Only block if clearly wrong role
+  if (user && user.role !== "student") {
     return <Navigate to="/" />;
 }
 
