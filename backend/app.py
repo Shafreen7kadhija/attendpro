@@ -175,7 +175,7 @@ def mark_attendance():
 
     student_id = data["student_id"]
     subject = data["subject"]
-    date_val = data["date"]
+    date_val = datetime.strptime(data["date"], "%Y-%m-%d").strftime("%d-%m-%Y")
     status = data["status"]
 
     existing = Attendance.query.filter_by(
