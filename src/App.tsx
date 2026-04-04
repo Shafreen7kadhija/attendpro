@@ -28,7 +28,25 @@ function App() {
 
       <Routes>
 
-        <Route path="/" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
+        <Route
+  path="/"
+  element={
+    (() => {
+      const user = JSON.parse(localStorage.getItem("user") || "null");
+
+      if (!isLoggedIn) {
+        return <Login setIsLoggedIn={setIsLoggedIn} />;
+      }
+
+      if (user?.role === "student") {
+        return <Navigate to={`/student-view/${user.id}`} />;
+      }
+
+      return <Navigate to="/home" />;
+    })()
+  }
+/>
+        
         <Route
         path="/home"
         element={isLoggedIn ? <Home /> : <Navigate to="/" />}
