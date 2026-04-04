@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-export default function Login() {
+export default function Login({ setIsLoggedIn }: any) {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,6 +23,7 @@ export default function Login() {
       console.log(res.data);
       localStorage.setItem("user", JSON.stringify(res.data));
       localStorage.setItem("isLoggedIn", "true");
+      setIsLoggedIn(true);
       toast.success("Login successful ✅");
       // 🔥 SIMPLE & WORKING LOGIC
       const user = res.data;
