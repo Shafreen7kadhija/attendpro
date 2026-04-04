@@ -62,11 +62,7 @@ function App() {
         <Route path="/student-dashboard/:id" element={<StudentProfile />} />
         <Route
         path="/student-view/:id"
-        element={
-          localStorage.getItem("isLoggedIn") === "true"
-          ? <StudentView />
-          : <Navigate to="/" />
-          }
+        element={<StudentView />}
         />
 
         <Route
