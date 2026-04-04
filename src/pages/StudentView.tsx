@@ -1,3 +1,4 @@
+import { Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
@@ -6,6 +7,10 @@ export default function StudentView() {
   const [student, setStudent] = useState<any>(null);
   const [weekly, setWeekly] = useState<any[]>([]);
   const [records, setRecords] = useState<any[]>([]);
+  const user = JSON.parse(localStorage.getItem("user") || "null");
+  if (!user || user.role !== "student") {
+    return <Navigate to="/" />;
+}
 
   useEffect(() => {
     fetch(`https://attendpro-backend.onrender.com/student_profile/${id}`)
@@ -24,7 +29,9 @@ export default function StudentView() {
     .catch(() => console.log("Records error"));
   }, [id]);
 
-  if (!student) return <p className="p-6">Loading...</p>;
+  if (student === null) {
+     return <p className="p-6">Loading...</p>;
+    }
 
   const getStatus = (value: number) => {
     if (value >= 75) return { text: "Good", color: "bg-green-100 text-green-700" };
