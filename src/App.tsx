@@ -18,6 +18,10 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(
     localStorage.getItem("isLoggedIn") === "true"
   );
+  // 🔥 ADD THIS HERE (exactly below useState)
+  useEffect(() => {
+    setIsLoggedIn(localStorage.getItem("isLoggedIn") === "true");
+  }, []);
 
  return (
   <div className="min-h-screen bg-gray-100 dark:bg-slate-800 dark:text-gray-100">
@@ -31,7 +35,7 @@ function App() {
       <Route
   path="/"
   element={
-    localStorage.getItem("isLoggedIn") === "true"
+    isLoggedIn
       ? <Navigate to="/home" />
       : <Login setIsLoggedIn={setIsLoggedIn} />
   }
@@ -40,7 +44,7 @@ function App() {
        <Route
        path="/home"
        element={
-        localStorage.getItem("isLoggedIn") === "true"
+        isLoggedIn
         ? <Home />
         : <Navigate to="/" />
         }
@@ -49,7 +53,7 @@ function App() {
         <Route
         path="/dashboard"
         element={
-          localStorage.getItem("isLoggedIn") === "true"
+          isLoggedIn
           ? <Dashboard />
           : <Navigate to="/" />}
         />
