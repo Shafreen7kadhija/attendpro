@@ -8,20 +8,43 @@ export default function StudentView() {
   const [weekly, setWeekly] = useState<any[]>([]);
   const [records, setRecords] = useState<any[]>([]);
   useEffect(() => {
-    fetch(`https://attendpro-backend.onrender.com/student_profile/${id}`)
-      .then(res => res.json())
-      .then(data => setStudent(data))
-      .catch(() => console.log("Error"));
 
     fetch(`https://attendpro-backend.onrender.com/student_profile/${id}`)
-      .then(res => res.json())
-      .then(data => setWeekly(data.weekly || []))
-      .catch(() => console.log("Weekly error"));
+  .then(res => res.json())
+  .then(data => {
+    console.log("WEEKLY DATA:", data);
+    setStudent(data);
+  })
+  .catch(() => console.log("Error"));
 
     fetch(`https://attendpro-backend.onrender.com/student-records/${id}`)
-    .then(res => res.json())
-    .then(data => setRecords(data))
-    .catch(() => console.log("Records error"));
+  .then(res => res.json())
+  .then(data => {
+    setRecords(data);
+
+    // 🔥 CREATE WEEKLY DATA FROM RECORDS
+    const weekMap: any = {
+      Sun: 0, Mon: 0, Tue: 0, Wed: 0, Thu: 0, Fri: 0, Sat: 0
+    };
+
+    data.forEach((rec: any) => {
+      const day = new Date(rec.date).toLocaleDateString("en-US", {
+        weekday: "short"
+      });
+
+      if (rec.status === "Present") {
+        weekMap[day] += 100;
+      }
+    });
+
+    const weeklyData = Object.keys(weekMap).map(day => ({
+      name: day,
+      attendance: weekMap[day]
+    }));
+
+    setWeekly(weeklyData);
+  })
+  .catch(() => console.log("Records error"));
   }, [id]);
 
   if (!student) {
