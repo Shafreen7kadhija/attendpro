@@ -28,7 +28,14 @@ function App() {
 
       <Routes>
 
-      <Route path="/" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
+      <Route
+  path="/"
+  element={
+    localStorage.getItem("isLoggedIn") === "true"
+      ? <Navigate to="/home" />
+      : <Login setIsLoggedIn={setIsLoggedIn} />
+  }
+/>
         
        <Route
        path="/home"

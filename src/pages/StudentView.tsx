@@ -7,12 +7,6 @@ export default function StudentView() {
   const [student, setStudent] = useState<any>(null);
   const [weekly, setWeekly] = useState<any[]>([]);
   const [records, setRecords] = useState<any[]>([]);
-  const user = JSON.parse(localStorage.getItem("user") || "null");
-  // 🔥 Only block if clearly wrong role
-  if (user && user.role !== "student") {
-    return <Navigate to="/" />;
-}
-
   useEffect(() => {
     fetch(`https://attendpro-backend.onrender.com/student_profile/${id}`)
       .then(res => res.json())
