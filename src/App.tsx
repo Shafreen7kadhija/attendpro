@@ -47,14 +47,21 @@ function App() {
   }
 />
         
-        <Route
-        path="/home"
-        element={isLoggedIn ? <Home /> : <Navigate to="/" />}
+       <Route
+       path="/home"
+       element={
+        localStorage.getItem("isLoggedIn") === "true"
+        ? <Home />
+        : <Navigate to="/" />
+        }
         />
 
         <Route
         path="/dashboard"
-        element={isLoggedIn ? <Dashboard /> : <Navigate to="/" />}
+        element={
+          localStorage.getItem("isLoggedIn") === "true"
+          ? <Dashboard />
+          : <Navigate to="/" />}
         />
 
         <Route path="/students" element={<Students />} />
@@ -65,7 +72,11 @@ function App() {
         <Route path="/student-dashboard/:id" element={<StudentProfile />} />
         <Route
         path="/student-view/:id"
-        element={isLoggedIn ? <StudentView /> : <Navigate to="/" />}
+        element={
+          localStorage.getItem("isLoggedIn") === "true"
+          ? <StudentView />
+          : <Navigate to="/" />
+          }
         />
 
         <Route
