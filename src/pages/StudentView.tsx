@@ -29,16 +29,19 @@ export default function StudentView() {
     };
 
     data.forEach((rec: any) => {
-      const [d, m, y] = rec.date.split("-");
-      const formattedDate = new Date(`${y}-${m}-${d}`);
-      const day = formattedDate.toLocaleDateString("en-US", {
-        weekday: "short"
-    });
+  if (!rec.date) return;
 
-      if (rec.status?.toLowerCase() === "present" || rec.status?.toLowerCase() === "late") {
-        weekMap[day] += 100;
-      }
-    });
+  const [d, m, y] = rec.date.split("-");
+  const formattedDate = new Date(`${y}-${m}-${d}`);
+
+  const day = formattedDate.toLocaleDateString("en-US", {
+    weekday: "short"
+  });
+
+  if (rec.status && rec.status.toLowerCase() === "present") {
+    weekMap[day] += 100;
+  }
+});
 
     const weeklyData = Object.keys(weekMap).map(day => ({
       name: day,

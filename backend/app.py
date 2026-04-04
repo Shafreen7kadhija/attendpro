@@ -919,19 +919,16 @@ def get_settings():
 
 @app.route("/student-records/<int:student_id>")
 def student_records(student_id):
-    conn = sqlite3.connect("attendance.db")
-    conn.row_factory = sqlite3.Row
-    cur = conn.cursor()
 
-    cur.execute("""
-        SELECT subject, date, time, status
-        FROM records
-        WHERE student_id = ?
-        ORDER BY date DESC
-    """, (student_id,))
+    records = EntryAttendance.query.filter_by(student_id=student_id).all()
 
-    data = [dict(row) for row in cur.fetchall()]
-    conn.close()
+    data = []
+
+    for r in records:
+        data.append({
+            "date": r.date,
+            "status": r.status
+        })
 
     return jsonify(data)
 
