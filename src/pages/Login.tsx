@@ -27,11 +27,13 @@ export default function Login({ setIsLoggedIn }: any) {
       toast.success("Login successful ✅");
       // 🔥 SIMPLE & WORKING LOGIC
       const user = res.data;
-      if (user.role === "student") {
-        navigate(`/student-view/${user.id}`);
-    } else {
-        navigate("/home");
-    }
+      setTimeout(() => {
+        if (user.role === "student") {
+            navigate(`/student-view/${user.id}`);
+        } else {
+            navigate("/home");
+        }
+    }, 100);
 
     } catch (err) {
       toast.error("Invalid email or password ❌");
