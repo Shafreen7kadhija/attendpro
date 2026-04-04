@@ -15,7 +15,7 @@ export default function StudentView() {
 
     fetch(`https://attendpro-backend.onrender.com/student_profile/${id}`)
       .then(res => res.json())
-      .then(data => setWeekly(data))
+      .then(data => setWeekly(data.weekly || []))
       .catch(() => console.log("Weekly error"));
 
     fetch(`https://attendpro-backend.onrender.com/student-records/${id}`)
