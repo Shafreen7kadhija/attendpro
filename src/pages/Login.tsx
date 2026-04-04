@@ -16,26 +16,20 @@ export default function Login() {
     try {
       setLoading(true);
 
-      const res = await axios.post(
-        "https://attendpro-backend.onrender.com/login",
-        {
-            email,
-            password,
-        }
-    );
+      const res = await axios.post("https://attendpro-backend.onrender.com/login", {
+        email,
+        password,
+      });
 
       localStorage.setItem("user", JSON.stringify(res.data));
       localStorage.setItem("isLoggedIn", "true");
-      localStorage.setItem("userEmail", email);
       toast.success("Login successful ✅");
-      setTimeout(() => {
-        const user = res.data;
-        if (user.role === "student") {
-            navigate(`/student-view/${user.id}`);
-        } else {
-            navigate("/home");
-        }
-      }, 1000);
+      const user = res.data;
+      if (user.role === "student") {
+        navigate(`/student-view/${user.id}`);
+    } else {
+        navigate("/home");
+    }
 
     } catch (err) {
       toast.error("Invalid email or password ❌");
