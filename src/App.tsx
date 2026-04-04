@@ -70,13 +70,13 @@ function App() {
         />
 
         <Route
-          path="/settings"
-          element={
-            <DashboardLayout>
-              <Settings />
-            </DashboardLayout>
-          }
-        />
+  path="/settings"
+  element={
+    <DashboardLayout>
+      <Settings setIsLoggedIn={setIsLoggedIn} />
+    </DashboardLayout>
+  }
+/>
 
       </Routes>
 

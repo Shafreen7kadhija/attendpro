@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"; // 🔥 add at top
 import { User, Bell, Shield, Palette } from "lucide-react";
 import toast from "react-hot-toast";
 
-export default function Settings() {
+export default function Settings({ setIsLoggedIn }: any) {
 
   const [name, setName] = useState("Shafreen Shahnaz");
   const [email, setEmail] = useState("shafreenshahnaz@gmail.com");
@@ -125,13 +126,18 @@ if (res.ok) {
 }
 };
 
-  const handleLogout = () => {
-    toast.success("Logged out 👋");
-    setTimeout(() => {
-      localStorage.removeItem("user");
-      window.location.href = "/";
-    }, 1000);
-  };
+const navigate = useNavigate(); // 🔥 add inside component
+
+const handleLogout = () => {
+  localStorage.removeItem("user");
+  localStorage.removeItem("isLoggedIn");
+
+  setIsLoggedIn(false); // 🔥 VERY IMPORTANT
+
+  toast.success("Logged out 👋");
+
+  navigate("/"); // 🔥 go to login page
+};
 
   return (
     <div className="p-10 bg-gray-100 min-h-screen animate-fade-in 
