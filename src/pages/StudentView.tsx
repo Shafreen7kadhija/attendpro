@@ -39,7 +39,7 @@ export default function StudentView() {
   });
 
   if (rec.status && rec.status.toLowerCase() === "present") {
-    weekMap[day] += 100;
+    weekMap[day] = 100;
   }
 });
 
