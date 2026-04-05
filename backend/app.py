@@ -870,7 +870,7 @@ def verify_password():
 
     user = User.query.filter_by(email=email).first()   # 🔥 FIX
 
-    if user and check_password_hash(user.password, current_password):
+    if user and user.password == current_password:
         return jsonify({"message": "Password correct"})
     else:
         return jsonify({"message": "Incorrect password"}), 400
