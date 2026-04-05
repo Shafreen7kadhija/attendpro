@@ -72,8 +72,8 @@ export default function Students() {
         setRegisterNumber("");
         setEmail("");
         setDepartment("");
-
         fetchStudents();
+        toast.success("Student added successfully");
 
       } else {
         alert("Failed to add student");
