@@ -74,8 +74,12 @@ export default function MarkAttendance() {
   // ✅ FIXED FUNCTION
   const handleStatus = async (studentId: number, status: string) => {
 
-    const attendanceDate =
-      date || new Date().toISOString().split("T")[0];
+    const rawDate = date || new Date().toISOString().split("T")[0];
+    
+    const attendanceDate = new Date(rawDate)
+    .toLocaleDateString("en-GB")
+    .split("/")
+    .join("-");
 
     setAttendance(prev => ({
       ...prev,
@@ -129,8 +133,11 @@ catch (error) {
 
   const allPresent: { [key: number]: string } = {};
 
-  const attendanceDate =
-    date || new Date().toISOString().split("T")[0];
+  const rawDate = date || new Date().toISOString().split("T")[0];
+  const attendanceDate = new Date(rawDate)
+  .toLocaleDateString("en-GB")
+  .split("/")
+  .join("-");
 
   for (const student of students) {
 
