@@ -247,7 +247,10 @@ def dashboard():
     total_students = len(students)
 
     today = date.today().strftime("%d-%m-%Y")
-    records = EntryAttendance.query.filter_by(date=today).all()
+    records = EntryAttendance.query.filter(
+        (EntryAttendance.date == today) |
+        (EntryAttendance.date == datetime.today().strftime("%Y-%m-%d"))
+    ).all()
     unique_records = {}
     for r in records:
         unique_records[r.student_id] = r.status.strip().lower()
@@ -379,7 +382,10 @@ def check_low_attendance():
 def distribution():
 
     today = date.today().strftime("%d-%m-%Y")
-    records = EntryAttendance.query.filter_by(date=today).all()
+    records = EntryAttendance.query.filter(
+        (EntryAttendance.date == today) |
+        (EntryAttendance.date == datetime.today().strftime("%Y-%m-%d"))
+    ).all()
 
     unique_records = {}
     for r in records:
@@ -416,19 +422,28 @@ def subjects():
         
         present = Attendance.query.filter(
             Attendance.subject == sub["code"],
-            Attendance.date == today,
+            (
+                (Attendance.date == today) |
+                (Attendance.date == datetime.today().strftime("%Y-%m-%d"))
+            ),
             func.lower(Attendance.status) == "present"
         ).count()
         
         late = Attendance.query.filter(
             Attendance.subject == sub["code"],
-            Attendance.date == today,
+            (
+                (Attendance.date == today) |
+                (Attendance.date == datetime.today().strftime("%Y-%m-%d"))
+            ),
             func.lower(Attendance.status) == "late"
         ).count()
         
         absent = Attendance.query.filter(
             Attendance.subject == sub["code"],
-            Attendance.date == today,
+            (
+                (Attendance.date == today) |
+                (Attendance.date == datetime.today().strftime("%Y-%m-%d"))
+            ),
             func.lower(Attendance.status) == "absent"
         ).count()
         
