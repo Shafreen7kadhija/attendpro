@@ -729,7 +729,7 @@ def login():
     print("DB User:", user.email if user else "No user")
     print("Stored Hash:", user.password if user else "No password")
 
-    if user and check_password_hash(user.password, password):
+    if user and user.password == password:
         return jsonify({
             "role": "staff",
             "message": "Login successful",
